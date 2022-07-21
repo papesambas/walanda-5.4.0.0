@@ -1,0 +1,40 @@
+{% extends 'blog/base.html.twig' %}
+
+{% block title %}Conference Guestbook -
+	{{ publication }}
+{% endblock %}
+
+{% block body %}
+	<div class="container my-2">
+		<h3>{{publication.titre}}</h3>
+		<hr>
+		{{publication.contenu|raw}}
+		<hr>
+		<small>
+			Publié(e) le :
+			{{ publication.createdAt|format_datetime('medium', 'short') }}
+			par :
+			{{publication.user}}
+		</small>
+		<hr class="my-4">
+		<h5>{{ publication }}
+			Commentaires</h5>
+
+		{% if comments|length > 0 %}
+			{% for comment in comments %}
+				{% if comment.photofilename %}
+					<img src="{{ asset('uploads/photos/' ~ comment.photofilename) }}"/>
+				{% endif %}
+
+				<h4>{{ comment.user }}</h4>
+				<small>
+					{{ comment.createdAt|format_datetime('medium', 'short') }}
+				</small>
+
+				<p>{{ comment.contenu }}</p>
+			{% endfor %}
+		{% else %}
+			<div>No comments have been posted yet for this conference.</div>
+		{% endif %}
+	</div>
+{% endblock %}

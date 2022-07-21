@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-2 bg-secondary bg-opacity-25 px-4 py-4" style="min-height: 35rem;">sticky</div>
+	<div class="col-10 bg-light py-2">
+		<h3 class="fst-italic mx-4 ps-2">
+			Nos Dernières Publications</h3>
+		<hr>
+		<div class="container mt-4">
+			<div data-aos="fade-up" class="col-md-12 d-flex flex-wrap  m-2">
+				{% for publication  in publications %}
+
+					<div class="card mb-3 mx-3" style="width: 480px;">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="..." class="img-fluid rounded-start" alt="...">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-title">{{publication.titre}}</h5>
+									<p class="card-text">{{publication.contenu|raw}}</p>
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+										<a href="{{ path('app_publications_show', {'slug': publication.slug}) }}" class="btn btn-primary btn-sm">Visualiser</a>
+									{% endif %}
+									<p class="card-text">
+										<small class="text-muted">{{publication.updatedAt}}</small>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

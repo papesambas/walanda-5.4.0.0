@@ -1,0 +1,11 @@
+{% extends 'blog/base.html.twig' %}
+
+{% block title %}Hello PublicationsController!
+{% endblock %}
+
+{% block body %}
+	{% include "publications/liste.html.twig" %}
+	<div class="navigation d-flex align-items-center justify-content-center pt-1">
+		{{ knp_pagination_render(publications) }}
+	</div>
+{% endblock %}
